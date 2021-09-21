@@ -1,0 +1,51 @@
+@base <http://people.cs.uct.ac.za/~zmahlaza/templates/test/> .
+@prefix  toct: <https://people.cs.uct.ac.za/~zmahlaza/ontologies/ToCT#> .
+@prefix  mola: <https://ontology.londisizwe.org/mola#> .
+@prefix  owl: <http://www.w3.org/2002/07/owl#> .
+@prefix  rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix  xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix  xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix  rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix co: <http://purl.org/co/> .
+@prefix cao: <http://people.cs.uct.ac.za/~zmahlaza/ontologies/ConcordAnnotationOntology#> .
+
+<sadjectTemplate> a toct:Template
+    ; toct:hasFirstPart <noun3Slot>
+    ; toct:hasLastPart <old>
+    ; toct:supportsLanguage <cpt_xhosa>
+    ; toct:hasPart <noun3Slot>, <old> .
+
+<cpt_xhosa> a mola:Dialect
+	; mola:isFamily <isiXhosa> .
+
+<noun3Slot> a toct:Slot
+	; co:index "1"^^xsd:positiveInteger
+	; toct:hasLabel "noun3Slot"^^xsd:string
+	; toct:hasNextPart <old> .
+
+<old> a toct:PolymorphicWord
+	; co:index "2"^^xsd:positiveInteger
+	; toct:hasFirstPart <SAdjC>
+	; toct:hasLastPart <fv>
+	; toct:reliesOn <noun3Slot>
+	; toct:hasPart <SAdjC>, <oldRoot>, <fv> .
+
+<SAdjC> a toct:Concord
+	; co:index "1"^^xsd:positiveInteger
+	; cao:hasConcordType <shortAdjConType>
+	; toct:hasLabel "SAdj"^^xsd:string
+	; toct:dependsOn <noun3Slot>
+	; toct:hasNextPart <oldRoot> .
+
+<oldRoot> a toct:Root
+	; co:index "2"^^xsd:positiveInteger
+	; toct:hasValue "dal"^^xsd:string
+	; toct:hasNextPart <fv> .
+
+<fv> a toct:UnimorphicAffix
+    ; co:index "3"^^xsd:positiveInteger
+    ; toct:hasValue "a"^^xsd:string .
+
+<shortAdjConType> a cao:ShortAdjectivalConcord .
+
+<posNounType> a xhtemp:Noun .

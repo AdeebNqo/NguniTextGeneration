@@ -1,0 +1,62 @@
+package za.co.mahlaza.research.grammarengine.base.models.template;
+
+
+import za.co.mahlaza.research.grammarengine.base.models.interfaces.InternalSlotRootAffix;
+import za.co.mahlaza.research.grammarengine.base.models.feature.Feature;
+
+import java.util.List;
+
+public class Locative extends Affix implements InternalSlotRootAffix {
+
+    private String identification;
+    private List<Feature> featureList;
+
+    private String value;
+    private String label;
+    private int index;
+
+    public Locative( String label, List<Feature> featureList) {
+        this.label = label;
+        this.featureList = featureList;
+    }
+
+    public String getIdentification() {
+        return identification;
+    }
+
+    public void setIdentification(String id) {
+        this.identification = id;
+    }
+
+    @Override
+    public String getValue() {
+        return toString();
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        if (value != null && !value.isEmpty()) {
+            return value;
+        }
+        return "["+label+"]";
+    }
+
+    @Override
+    public String getType() {
+        return "Locative";
+    }
+
+    @Override
+    public int getIndex() {
+        return index;
+    }
+
+    @Override
+    public void setIndex(int index) {
+        this.index = index;
+    }
+}
