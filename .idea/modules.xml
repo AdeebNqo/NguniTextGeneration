@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CodeTesting/CodeTesting.iml" filepath="$PROJECT_DIR$/CodeTesting/CodeTesting.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GITemplateParsing/GITemplateParsing.iml" filepath="$PROJECT_DIR$/GITemplateParsing/GITemplateParsing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GITemplates.iml" filepath="$PROJECT_DIR$/GITemplates.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GrammarEngineBase/GrammarEngineBase.iml" filepath="$PROJECT_DIR$/GrammarEngineBase/GrammarEngineBase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GrammarEngineNguni/GrammarEngineNguni.iml" filepath="$PROJECT_DIR$/GrammarEngineNguni/GrammarEngineNguni.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TemplErrorDetection/TemplErrorDetection.iml" filepath="$PROJECT_DIR$/TemplErrorDetection/TemplErrorDetection.iml" />
+    </modules>
+  </component>
+</project>

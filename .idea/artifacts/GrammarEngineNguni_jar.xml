@@ -1,0 +1,22 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="GrammarEngineNguni:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/GrammarEngineNguni_jar</output-path>
+    <root id="archive" name="GrammarEngineNguni.jar">
+      <element id="module-output" name="GrammarEngineNguni" />
+      <element id="module-output" name="GrammarEngineBase" />
+      <element id="module-output" name="GITemplateParsing" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/jena/jena-core/3.17.0/jena-core-3.17.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/jena/jena-base/3.17.0/jena-base-3.17.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/jena/jena-shaded-guava/3.17.0/jena-shaded-guava-3.17.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/commons/commons-csv/1.8/commons-csv-1.8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/commons-io/commons-io/2.8.0/commons-io-2.8.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.11/commons-lang3-3.11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/commons-codec/commons-codec/1.15/commons-codec-1.15.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/commons/commons-compress/1.20/commons-compress-1.20.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/github/andrewoma/dexx/collection/0.7/collection-0.7.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/jena/jena-iri/3.17.0/jena-iri-3.17.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/commons-cli/commons-cli/1.4/commons-cli-1.4.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
