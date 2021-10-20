@@ -11,7 +11,6 @@ public class Main {
     public static void main(String[] args) {
         testParseTemplate();
         testZuluUtils();
-
     }
     public static void testZuluUtils () {
         String noun = "ukudla";
@@ -19,7 +18,7 @@ public class Main {
         System.out.println(noun+" is a noun = "+zuluUtils.isNoun(noun));
     }
     public static void testParseTemplate () {
-        String templatePath = "/home/zola/Documents/ToCT Ontology and Code/OWLSIZ/Templates/template1.1.ttl";
+        String templatePath = "/home/zola/Documents/ToCT Ontology and Code-ArchiveOCt2021/OWLSIZ/Templates/template1.1.ttl";
         String templateName = "templ1.1";
         String templateURI = "http://people.cs.uct.ac.za/~zmahlaza/templates/owlsiz/";
 
