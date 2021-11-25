@@ -29,9 +29,8 @@ Support you have created a template, serialised it using turtle, and stored it i
     String templatePath = "Templates/template1.1.ttl";
     String templateName = "templ1.1";
     String templateURI = "http://people.cs.uct.ac.za/~zmahlaza/templates/owlsiz/";
-
-TemplateReader.Init(new ZuluFeatureParser());
-TemplateReader.setTemplateOntologyNamespace(URIS.ToCT_NS);
-Template template = TemplateReader.parseTemplate(templateName, templateURI, templatePath);
+    TemplateReader.Init(new ZuluFeatureParser());
+    TemplateReader.setTemplateOntologyNamespace(URIS.ToCT_NS);
+    Template template = TemplateReader.parseTemplate(templateName, templateURI, templatePath);
 
 You can then do whatever you want with the template object. Please note that `templateURI` need not be the same as you may chosen a different one.
