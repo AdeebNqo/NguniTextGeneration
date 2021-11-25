@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="GrammarEngineBase:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/GrammarEngineBase_jar</output-path>
+    <root id="archive" name="GrammarEngineBase.jar">
+      <element id="module-output" name="GrammarEngineBase" />
+    </root>
+  </artifact>
+</component>
