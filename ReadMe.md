@@ -2,7 +2,7 @@
 
 0. Open the  project using Intellij Idea.
 
-# Building the GITemplateParsing, GrammarEngineBase, GrammarEngineNguni, and TemplErrorDetection
+# Building the modules
 
 1. From the main menu, select Build | Build Artifacts.
 2. Point to the created .jar (e.g., GrammarEngineBase:jar) and select Build.
