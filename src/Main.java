@@ -6,11 +6,14 @@ import za.co.mahlaza.research.grammarengine.nguni.zu.ZuluUtils;
 import za.co.mahlaza.research.templateparsing.TemplateReader;
 import za.co.mahlaza.research.templateparsing.URIS;
 
+import java.util.Collection;
+
 public class Main {
 
     public static void main(String[] args) {
         try {
             testParseTemplate();
+            testParseTemplates();
             testZuluUtils();
         } catch (Exception e) {
             e.printStackTrace();
@@ -23,12 +26,24 @@ public class Main {
     }
     public static void testParseTemplate () throws Exception {
         String templatePath = "/home/zola/Documents/ToCT Ontology and Code-ArchiveOCt2021/OWLSIZ/Templates/template1.1.ttl";
-        String templateName = "templ1.1x";
+        String templateName = "templ1.1";
         String templateURI = "http://people.cs.uct.ac.za/~zmahlaza/templates/owlsiz/";
 
         TemplateReader.Init(new ZuluFeatureParser());
         TemplateReader.setTemplateOntologyNamespace(URIS.ToCT_NS);
         Template template = TemplateReader.parseTemplate(templateName, templateURI, templatePath);
+    }
+
+    public static void testParseTemplates() throws Exception {
+        String templatePath = "/home/zola/Documents/ToCT Ontology and Code-ArchiveOCt2021/OWLSIZ/Templates/template1.1.ttl";
+        String templateURI = "http://people.cs.uct.ac.za/~zmahlaza/templates/owlsiz/";
+
+        TemplateReader.Init(new ZuluFeatureParser());
+        TemplateReader.setTemplateOntologyNamespace(URIS.ToCT_NS);
+        Collection<Template> templates = TemplateReader.parseTemplates(templateURI, templatePath);
+        for (Template template : templates) {
+            System.out.println("Template -> "+template);
+        }
     }
 
 

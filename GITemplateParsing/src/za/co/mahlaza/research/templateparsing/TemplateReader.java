@@ -10,10 +10,8 @@ import za.co.mahlaza.research.grammarengine.base.models.interfaces.Word;
 import za.co.mahlaza.research.grammarengine.base.models.template.*;
 
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+
 import static za.co.mahlaza.research.templateparsing.URIS.*;
 
 //TODO: Use OWLAPI when reading/parsing the data
@@ -32,6 +30,27 @@ public class TemplateReader {
 
     public static void setTemplateOntologyNamespace(String namespace) {
         TEMPLATE_NAMESPACE = namespace;
+    }
+
+    public static Collection<Template> parseTemplates(String baseURI, String templateFilename) throws Exception {
+        Collection<Template> templates = new LinkedList<>();
+
+        Model model = ModelFactory.createDefaultModel();
+        InputStream in = FileManager.get().open(templateFilename);
+        model.read(in, baseURI, "TTL"); //TODO: move the TLL to the params so we cant handle diff. serializations
+
+        Property isa = model.createProperty(RDF_NS + "type");
+        Resource templateType = model.createResource(ToCT_NS + "Template");
+        StmtIterator sIt = model.listStatements(null, isa, templateType);
+
+        while (sIt.hasNext()) {
+            Statement st = sIt.next();
+            String templateName = st.getSubject().getLocalName();
+            Template template = parseTemplate(templateName, baseURI, templateFilename);
+            templates.add(template);
+        }
+
+        return templates;
     }
 
     public static Template parseTemplate(String templateName, String baseURI, String templateFilename) throws Exception {
