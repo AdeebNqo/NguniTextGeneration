@@ -9,7 +9,7 @@
 3. If you now look at the out/artifacts folder, you'll find your .jar file there.
 4. Add the jar to your project.
 
-# Loading template 
+# Loading a template from a file
 
 Here's an example of a method, taken from the OWLSIZ verbaliser, that demonstrates how to load a template from a file.
 
