@@ -34,7 +34,7 @@ public class TemplateReader {
         TEMPLATE_NAMESPACE = namespace;
     }
 
-    public static Template parseTemplate(String templateName, String baseURI, String templateFilename) {
+    public static Template parseTemplate(String templateName, String baseURI, String templateFilename) throws Exception {
 
         Model templateModel = ModelFactory.createDefaultModel();
         InputStream in = FileManager.get().open(templateFilename);
@@ -46,9 +46,12 @@ public class TemplateReader {
         return template;
     }
 
-    public static Template parseTemplate(String templateName, String baseNamespace, Model model) {
+    public static Template parseTemplate(String templateName, String baseNamespace, Model model) throws Exception {
         Resource template = model.getResource(baseNamespace + templateName);
 
+        if (!model.containsResource(template)) {
+            throw new Exception("The specified file does not contain a template called "+templateName);
+        }
         List<Resource> allWords = getAllSequentialResources(template, model);
 
         actualWords = new TemplatePortion[allWords.size()]; //TODO: figure out if the indexing of the words still makes sense

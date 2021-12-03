@@ -9,17 +9,21 @@ import za.co.mahlaza.research.templateparsing.URIS;
 public class Main {
 
     public static void main(String[] args) {
-        testParseTemplate();
-        testZuluUtils();
+        try {
+            testParseTemplate();
+            testZuluUtils();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     public static void testZuluUtils () {
         String noun = "ukudla";
         ZuluUtils zuluUtils = new ZuluUtils();
         System.out.println(noun+" is a noun = "+zuluUtils.isNoun(noun));
     }
-    public static void testParseTemplate () {
+    public static void testParseTemplate () throws Exception {
         String templatePath = "/home/zola/Documents/ToCT Ontology and Code-ArchiveOCt2021/OWLSIZ/Templates/template1.1.ttl";
-        String templateName = "templ1.1";
+        String templateName = "templ1.1x";
         String templateURI = "http://people.cs.uct.ac.za/~zmahlaza/templates/owlsiz/";
 
         TemplateReader.Init(new ZuluFeatureParser());
@@ -28,7 +32,7 @@ public class Main {
     }
 
 
-    public static Template getTemplate(String templateName, String templateURI, String templatePath) throws UnsupportedOperationException {
+    public static Template getTemplate(String templateName, String templateURI, String templatePath) throws Exception {
         //TODO: find a way to handle features better. There could be different kinds of features. Perhaps need to register different parsers?
         TemplateReader.Init(new ZuluFeatureParser());
         TemplateReader.setTemplateOntologyNamespace(URIS.ToCT_NS);
