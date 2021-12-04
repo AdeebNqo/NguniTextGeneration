@@ -8,6 +8,7 @@ import java.util.List;
 public class Root extends WordPortion implements InternalSlotRootAffix {
 
     private List<Feature> features;
+    private InternalSlotRootAffix nextPart;
 
     public Root(String value, List<Feature> featureList) {
         this.value = value;
@@ -22,5 +23,10 @@ public class Root extends WordPortion implements InternalSlotRootAffix {
     @Override
     public String getType() {
         return "Root";
+    }
+
+    @Override
+    public void setNextPart(InternalSlotRootAffix nextPart) {
+        this.nextPart = nextPart;
     }
 }

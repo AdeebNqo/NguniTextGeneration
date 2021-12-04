@@ -15,11 +15,11 @@ public class Slot extends TemplatePortion implements InternalSlotOrWordPortion, 
     private String value;
     private String label;
 
-
     private SlotFiller insertedValue;
     private List<Feature> features;
 
     private List<String> reliesOnLabels;
+    private InternalSlotRootAffix nextPart;
 
     public Slot(String label, List<Feature> featureList) {
         this("", label, featureList);
@@ -74,6 +74,10 @@ public class Slot extends TemplatePortion implements InternalSlotOrWordPortion, 
         this.reliesOnLabels = reliesOnLabels;
     }
 
+    public List<String> getReliesOnLabels() {
+        return reliesOnLabels;
+    }
+
     @Override
     public int getIndex() {
         return index;
@@ -87,6 +91,11 @@ public class Slot extends TemplatePortion implements InternalSlotOrWordPortion, 
     @Override
     public String getType() {
         return "Slot";
+    }
+
+    @Override
+    public void setNextPart(InternalSlotRootAffix internalPart) {
+        nextPart = internalPart;
     }
 
     @Override

@@ -15,6 +15,8 @@ public class Locative extends Affix implements InternalSlotRootAffix {
     private String label;
     private int index;
 
+    private InternalSlotRootAffix nextPart;
+
     public Locative( String label, List<Feature> featureList) {
         this.label = label;
         this.featureList = featureList;
@@ -58,5 +60,13 @@ public class Locative extends Affix implements InternalSlotRootAffix {
     @Override
     public void setIndex(int index) {
         this.index = index;
+    }
+
+    public InternalSlotRootAffix getNextPart() {
+        return nextPart;
+    }
+
+    public void setNextPart(InternalSlotRootAffix nexPart) {
+        this.nextPart = nexPart;
     }
 }

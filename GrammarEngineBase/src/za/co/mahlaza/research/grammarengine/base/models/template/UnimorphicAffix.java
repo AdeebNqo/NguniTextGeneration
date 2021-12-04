@@ -11,6 +11,8 @@ public class UnimorphicAffix extends Affix implements InternalSlotRootAffix {
     private int index;
     private List<Feature> features;
 
+    private InternalSlotRootAffix nextPart;
+
     public UnimorphicAffix(String value, List<Feature> featureList) {
         this.value = value;
         this.features = featureList;
@@ -34,6 +36,11 @@ public class UnimorphicAffix extends Affix implements InternalSlotRootAffix {
     @Override
     public String getType() {
         return "UnimorphicAffix";
+    }
+
+    @Override
+    public void setNextPart(InternalSlotRootAffix nextPart) {
+        this.nextPart = nextPart;
     }
 
     @Override

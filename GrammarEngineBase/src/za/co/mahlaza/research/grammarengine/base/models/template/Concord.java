@@ -18,6 +18,7 @@ public class Concord extends Affix implements InternalSlotRootAffix {
     private SlotFiller controller;
 
     private int index;
+    private InternalSlotRootAffix nextPart;
 
     public Concord(String label, List<Feature> featureList) {
         this("", label, featureList);
@@ -92,5 +93,10 @@ public class Concord extends Affix implements InternalSlotRootAffix {
     @Override
     public void setIndex(int index) {
         this.index = index;
+    }
+
+    @Override
+    public void setNextPart(InternalSlotRootAffix nextPart) {
+        this.nextPart = nextPart;
     }
 }

@@ -14,6 +14,7 @@ public class Main {
         try {
             testParseTemplate();
             testParseTemplates();
+            testNextPartInATemplate();
             testZuluUtils();
         } catch (Exception e) {
             e.printStackTrace();
@@ -24,7 +25,20 @@ public class Main {
         ZuluUtils zuluUtils = new ZuluUtils();
         System.out.println(noun+" is a noun = "+zuluUtils.isNoun(noun));
     }
-    public static void testParseTemplate () throws Exception {
+
+    public static void testNextPartInATemplate() throws Exception {
+        String templatePath = "/home/zola/Documents/ToCT Ontology and Code-ArchiveOCt2021/OWLSIZ/Templates/template1.1.ttl";
+        String templateName = "templ1.1";
+        String templateURI = "http://people.cs.uct.ac.za/~zmahlaza/templates/owlsiz/";
+
+        TemplateReader.Init(new ZuluFeatureParser());
+        TemplateReader.setTemplateOntologyNamespace(URIS.ToCT_NS);
+        Template template = TemplateReader.parseTemplate(templateName, templateURI, templatePath);
+        System.out.println("Second template portion = "+template.words.get(0).getNextPart());
+        System.out.println("Second part of the first poly. word = "+template.getPolymorphicWords().get(0).getNextPart());
+    }
+
+    public static void testParseTemplate() throws Exception {
         String templatePath = "/home/zola/Documents/ToCT Ontology and Code-ArchiveOCt2021/OWLSIZ/Templates/template1.1.ttl";
         String templateName = "templ1.1";
         String templateURI = "http://people.cs.uct.ac.za/~zmahlaza/templates/owlsiz/";

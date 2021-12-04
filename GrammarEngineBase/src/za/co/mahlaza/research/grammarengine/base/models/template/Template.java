@@ -16,6 +16,12 @@ public class Template {
 
     public Template(List<TemplatePortion> words) {
         this.words = words;
+
+        for (int index = 0; index < words.size()-1; ++index) {
+            TemplatePortion curr = this.words.get(index);
+            TemplatePortion next = this.words.get(index+1);
+            curr.setNextPart(next);
+        }
     }
 
 

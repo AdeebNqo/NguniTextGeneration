@@ -12,6 +12,8 @@ public class AffixChunk extends WordPortion implements InternalSlotRootAffix {
     private String value;
     private List<Feature> features;
 
+    private InternalSlotRootAffix nextPart;
+
     public AffixChunk(String value, List<Affix> affixes, List<Feature> featureList) {
         this.affixes = affixes;
         this.value = value;
@@ -40,6 +42,11 @@ public class AffixChunk extends WordPortion implements InternalSlotRootAffix {
     @Override
     public String getValue() {
         return value;
+    }
+
+    @Override
+    public void setNextPart(InternalSlotRootAffix internalPart) {
+
     }
 
     @Override

@@ -31,6 +31,12 @@ public class PolymorphicWord extends Chimera {
         features = featuresList;
         fillsSlotResources = new LinkedList<>();
         dependsOnWordResources = new LinkedList<>();
+
+        for (int index = 0; index < this.wordPortions.size()-1; ++index) {
+            InternalSlotRootAffix curr = this.wordPortions.get(index);
+            InternalSlotRootAffix next = this.wordPortions.get(index+1);
+            curr.setNextPart(next);
+        }
     }
 
     public void addSlotItCanFill(String slotName) {

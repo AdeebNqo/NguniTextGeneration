@@ -15,6 +15,8 @@ public class Copula extends Affix implements InternalSlotRootAffix {
     private String label;
     private int index;
 
+    private InternalSlotRootAffix nextPart;
+
     public Copula( String label, List<Feature> featureList) {
         this.label = label;
         this.featureList = featureList;
@@ -58,5 +60,10 @@ public class Copula extends Affix implements InternalSlotRootAffix {
     @Override
     public void setIndex(int index) {
         this.index = index;
+    }
+
+    @Override
+    public void setNextPart(InternalSlotRootAffix nextPart) {
+        this.nextPart = nextPart;
     }
 }
