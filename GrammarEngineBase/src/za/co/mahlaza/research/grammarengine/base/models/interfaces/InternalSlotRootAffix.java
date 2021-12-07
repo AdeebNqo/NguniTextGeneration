@@ -4,4 +4,7 @@ public interface InternalSlotRootAffix {
     String getType();
     String getValue();
     void setNextPart(InternalSlotRootAffix internalPart);
+
+    public void setSerialisedName(String name);
+    public String getSerialisedName();
 }

@@ -83,10 +83,12 @@ public class PolymorphicWord extends Chimera {
         return toString();
     }
 
+    @Deprecated
     public String getIdentification() {
         return identification;
     }
 
+    @Deprecated
     public void setIdentification(String id) {
         this.identification = id;
     }

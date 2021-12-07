@@ -13,6 +13,7 @@ public class AffixChunk extends WordPortion implements InternalSlotRootAffix {
     private List<Feature> features;
 
     private InternalSlotRootAffix nextPart;
+    private String serialisedName;
 
     public AffixChunk(String value, List<Affix> affixes, List<Feature> featureList) {
         this.affixes = affixes;
@@ -46,7 +47,17 @@ public class AffixChunk extends WordPortion implements InternalSlotRootAffix {
 
     @Override
     public void setNextPart(InternalSlotRootAffix internalPart) {
+        nextPart = internalPart;
+    }
 
+    @Override
+    public String getSerialisedName() {
+        return serialisedName;
+    }
+
+    @Override
+    public void setSerialisedName(String serialisedName) {
+        this.serialisedName = serialisedName;
     }
 
     @Override

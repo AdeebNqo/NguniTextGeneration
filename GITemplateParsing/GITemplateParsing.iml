@@ -8,6 +8,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="GrammarEngineBase" />
-    <orderEntry type="library" name="org.apache.jena:jena-core:3.17.0" level="project" />
+    <orderEntry type="library" exported="" name="apache.jena.core" level="project" />
+    <orderEntry type="library" exported="" name="apache.jena.arq" level="project" />
   </component>
 </module>

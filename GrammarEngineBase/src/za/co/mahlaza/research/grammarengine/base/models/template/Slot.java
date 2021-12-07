@@ -4,7 +4,6 @@ import za.co.mahlaza.research.grammarengine.base.interfaces.SlotFiller;
 import za.co.mahlaza.research.grammarengine.base.models.interfaces.InternalSlotOrWordPortion;
 import za.co.mahlaza.research.grammarengine.base.models.interfaces.InternalSlotRootAffix;
 import za.co.mahlaza.research.grammarengine.base.models.feature.Feature;
-
 import java.util.List;
 
 public class Slot extends TemplatePortion implements InternalSlotOrWordPortion, InternalSlotRootAffix {
@@ -32,13 +31,15 @@ public class Slot extends TemplatePortion implements InternalSlotOrWordPortion, 
     }
 
     public String getValue() {
-        return toString();
+        return value;
     }
 
+    @Deprecated
     public String getIdentification() {
         return identification;
     }
 
+    @Deprecated
     public void setIdentification(String id) {
         this.identification= id;
     }

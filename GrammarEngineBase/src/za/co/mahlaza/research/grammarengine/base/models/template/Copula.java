@@ -16,12 +16,14 @@ public class Copula extends Affix implements InternalSlotRootAffix {
     private int index;
 
     private InternalSlotRootAffix nextPart;
+    private String serialisedName;
 
     public Copula( String label, List<Feature> featureList) {
         this.label = label;
         this.featureList = featureList;
     }
 
+    @Deprecated
     public String getIdentification() {
         return identification;
     }
@@ -65,5 +67,15 @@ public class Copula extends Affix implements InternalSlotRootAffix {
     @Override
     public void setNextPart(InternalSlotRootAffix nextPart) {
         this.nextPart = nextPart;
+    }
+
+    @Override
+    public String getSerialisedName() {
+        return serialisedName;
+    }
+
+    @Override
+    public void setSerialisedName(String serialisedName) {
+        this.serialisedName = serialisedName;
     }
 }

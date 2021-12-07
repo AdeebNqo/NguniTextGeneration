@@ -2,6 +2,7 @@ package za.co.mahlaza.research.grammarengine.base.models.template;
 
 import za.co.mahlaza.research.grammarengine.base.interfaces.SlotFiller;
 import za.co.mahlaza.research.grammarengine.base.models.interfaces.Word;
+import za.co.mahlaza.research.grammarengine.base.models.mola.Languoid;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -11,8 +12,10 @@ public class Template {
     //private Model underlyingModel;
     public boolean TEMPLATE_SPEC_OMITTED_SPACES = true;
 
+    public String serialisedName;
+
     public List<TemplatePortion> words;
-    public String languageFamily;
+    public Languoid language;
 
     public Template(List<TemplatePortion> words) {
         this.words = words;
@@ -115,12 +118,20 @@ public class Template {
     }
 */
 
-    public void setLanguageFamily(String languageFamily) {
-        this.languageFamily = languageFamily;
+    public void setLanguage(Languoid language) {
+        this.language = language;
     }
 
-    public String getLanguageFamily() {
-        return languageFamily;
+    public Languoid getLanguage() {
+        return language;
+    }
+
+    public void setSerialisedName(String name) {
+        serialisedName = name;
+    }
+
+    public String getSerialisedName() {
+        return serialisedName;
     }
 
     @Override

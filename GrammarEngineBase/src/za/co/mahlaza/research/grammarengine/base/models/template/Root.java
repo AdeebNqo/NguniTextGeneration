@@ -9,6 +9,7 @@ public class Root extends WordPortion implements InternalSlotRootAffix {
 
     private List<Feature> features;
     private InternalSlotRootAffix nextPart;
+    private String serialisedName;
 
     public Root(String value, List<Feature> featureList) {
         this.value = value;
@@ -28,5 +29,15 @@ public class Root extends WordPortion implements InternalSlotRootAffix {
     @Override
     public void setNextPart(InternalSlotRootAffix nextPart) {
         this.nextPart = nextPart;
+    }
+
+    @Override
+    public String getSerialisedName() {
+        return serialisedName;
+    }
+
+    @Override
+    public void setSerialisedName(String serialisedName) {
+        this.serialisedName = serialisedName;
     }
 }

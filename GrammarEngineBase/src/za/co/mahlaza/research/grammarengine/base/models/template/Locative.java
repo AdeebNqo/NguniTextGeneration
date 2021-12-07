@@ -16,16 +16,19 @@ public class Locative extends Affix implements InternalSlotRootAffix {
     private int index;
 
     private InternalSlotRootAffix nextPart;
+    private String serialisedName;
 
     public Locative( String label, List<Feature> featureList) {
         this.label = label;
         this.featureList = featureList;
     }
 
+    @Deprecated
     public String getIdentification() {
         return identification;
     }
 
+    @Deprecated
     public void setIdentification(String id) {
         this.identification = id;
     }
@@ -68,5 +71,15 @@ public class Locative extends Affix implements InternalSlotRootAffix {
 
     public void setNextPart(InternalSlotRootAffix nexPart) {
         this.nextPart = nexPart;
+    }
+
+    @Override
+    public String getSerialisedName() {
+        return serialisedName;
+    }
+
+    @Override
+    public void setSerialisedName(String serialisedName) {
+        this.serialisedName = serialisedName;
     }
 }

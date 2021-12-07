@@ -19,6 +19,7 @@ public class Concord extends Affix implements InternalSlotRootAffix {
 
     private int index;
     private InternalSlotRootAffix nextPart;
+    private String serialisedName;
 
     public Concord(String label, List<Feature> featureList) {
         this("", label, featureList);
@@ -31,17 +32,19 @@ public class Concord extends Affix implements InternalSlotRootAffix {
         this.featureList = featureList;
     }
 
+    @Deprecated
     public String getIdentification() {
         return identification;
     }
 
+    @Deprecated
     public void setIdentification(String id) {
         this.identification = id;
     }
 
     @Override
     public String getValue() {
-        return toString();
+        return value;
     }
 
     public void setValue(String value) {
@@ -98,5 +101,15 @@ public class Concord extends Affix implements InternalSlotRootAffix {
     @Override
     public void setNextPart(InternalSlotRootAffix nextPart) {
         this.nextPart = nextPart;
+    }
+
+    @Override
+    public String getSerialisedName() {
+        return serialisedName;
+    }
+
+    @Override
+    public void setSerialisedName(String serialisedName) {
+        this.serialisedName = serialisedName;
     }
 }

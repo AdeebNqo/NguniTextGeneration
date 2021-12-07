@@ -4,8 +4,8 @@ import za.co.mahlaza.research.grammarengine.base.models.template.Template;
 import za.co.mahlaza.research.grammarengine.nguni.zu.ZuluFeatureParser;
 import za.co.mahlaza.research.grammarengine.nguni.zu.ZuluUtils;
 import za.co.mahlaza.research.templateparsing.TemplateReader;
+import za.co.mahlaza.research.templateparsing.TemplateWriter;
 import za.co.mahlaza.research.templateparsing.URIS;
-
 import java.util.Collection;
 
 public class Main {
@@ -16,10 +16,25 @@ public class Main {
             testParseTemplates();
             testNextPartInATemplate();
             testZuluUtils();
+            testSaveTemplate();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    public static void testSaveTemplate() throws Exception {
+        String templatePath = "/home/zola/Documents/ToCT Ontology and Code-ArchiveOCt2021/OWLSIZ/Templates/template1.1.ttl";
+        String templateName = "templ1.1";
+        String templateURI = "http://people.cs.uct.ac.za/~zmahlaza/templates/owlsiz/";
+
+        TemplateReader.Init(new ZuluFeatureParser());
+        TemplateReader.setTemplateOntologyNamespace(URIS.ToCT_NS);
+        Template template = TemplateReader.parseTemplate(templateName, templateURI, templatePath);
+
+        String outputFilename = "/tmp/testtemplate1.1.ttl";
+        TemplateWriter.saveTemplate(template, templateURI, outputFilename);
+    }
+
     public static void testZuluUtils () {
         String noun = "ukudla";
         ZuluUtils zuluUtils = new ZuluUtils();

@@ -1,17 +1,23 @@
 package za.co.mahlaza.research.templateparsing;
 
-import org.apache.jena.rdf.model.*;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.rdf.model.ResIterator;
+import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.util.FileManager;
+import org.apache.jena.rdf.model.StmtIterator;
 import za.co.mahlaza.research.grammarengine.base.interfaces.SlotFiller;
 import za.co.mahlaza.research.grammarengine.base.models.feature.Feature;
 import za.co.mahlaza.research.grammarengine.base.models.feature.FeatureParser;
 import za.co.mahlaza.research.grammarengine.base.models.interfaces.InternalSlotRootAffix;
 import za.co.mahlaza.research.grammarengine.base.models.interfaces.Word;
+import za.co.mahlaza.research.grammarengine.base.models.mola.*;
 import za.co.mahlaza.research.grammarengine.base.models.template.*;
-
 import java.io.InputStream;
 import java.util.*;
-
 import static za.co.mahlaza.research.templateparsing.URIS.*;
 
 //TODO: Use OWLAPI when reading/parsing the data
@@ -36,7 +42,7 @@ public class TemplateReader {
         Collection<Template> templates = new LinkedList<>();
 
         Model model = ModelFactory.createDefaultModel();
-        InputStream in = FileManager.get().open(templateFilename);
+        InputStream in = RDFDataMgr.open(templateFilename);
         model.read(in, baseURI, "TTL"); //TODO: move the TLL to the params so we cant handle diff. serializations
 
         Property isa = model.createProperty(RDF_NS + "type");
@@ -56,10 +62,11 @@ public class TemplateReader {
     public static Template parseTemplate(String templateName, String baseURI, String templateFilename) throws Exception {
 
         Model templateModel = ModelFactory.createDefaultModel();
-        InputStream in = FileManager.get().open(templateFilename);
+        InputStream in = RDFDataMgr.open(templateFilename);
         templateModel.read(in, baseURI, "TTL"); //TODO: move the TLL to the params so we cant handle diff. serializations
 
         Template template = parseTemplate(templateName, baseURI, templateModel);
+        template.setSerialisedName(templateName);
         //template.setUnderlyingModel(templateModel);
 
         return template;
@@ -81,6 +88,7 @@ public class TemplateReader {
             String wordType = getResourceType (currWordResource, model);
             if (wordType.equals("Slot")) {
                 TemplatePortion currWord =  getTemplatePortion(currWordResource, model);
+                currWord.setSerialisedName(currWordResource.getLocalName());
                 actualWords[i] = currWord;
             }
         }
@@ -91,24 +99,68 @@ public class TemplateReader {
             String wordType = getResourceType (currWordResource, model);
             if (!wordType.equals("Slot")) {
                 TemplatePortion currWord =  getTemplatePortion(currWordResource, model);
+                currWord.setSerialisedName(currWordResource.getLocalName());
                 actualWords[i] = currWord;
             }
         }
 
         //TODO: For unimorphic, find the polymorph it providesFor and add the unimorph to the
 
-        //getting the template's language family
+
         //TODO: Read other aspects of the supported language
-        Property generateProp = model.getProperty(TEMPLATE_NAMESPACE + "supportsLanguage");
-        Property langFamilyProp = model.getProperty(MOLA_NS + "isFamily");
-        Resource languageResource = (Resource) template.getProperty(generateProp).getObject();
-        Resource languageFamilyResource = (Resource) languageResource.getProperty(langFamilyProp).getObject();
-        String languageFamily = languageFamilyResource.getLocalName();
+        //getting the template's language family
+        Property isa = model.createProperty(RDF_NS + "type");
+        Resource dialectType = model.createResource(MOLA_NS + "Dialect");
+        Resource ethnolectType = model.createResource(MOLA_NS + "Ethnolect");
+        Resource sociolectType = model.createResource(MOLA_NS + "Sociolect");
+        Resource idiolectType = model.createResource(MOLA_NS + "Idiolect");
+        Resource pidginType = model.createResource(MOLA_NS + "Pidgin");
+        Resource[] langTypes = {dialectType, ethnolectType, sociolectType, idiolectType, pidginType};
+        Language lang = null;
+        for (Resource langType : langTypes) {
+            StmtIterator sIt = model.listStatements(null, isa, langType);
+            if (lang == null && sIt.hasNext()) {
+                Statement stmt = sIt.next();
+                switch (langType.getLocalName()) {
+                    case "Dialect": {
+                        lang = new Dialect();
+                        break;
+                    }
+                    case "Ethnolect": {
+                        lang = new Ethnolect();
+                        break;
+                    }
+                    case "Sociolect": {
+                        lang = new Sociolect();
+                        break;
+                    }
+                    case "Idiolect": {
+                        lang = new Idiolect();
+                        break;
+                    }
+                    case "Pidgin": {
+                        lang = new Pidgin();
+                        break;
+                    }
+                }
+                lang.setSerialisedName(stmt.getSubject().getLocalName());
+
+                Property langFamilyProp = model.getProperty(MOLA_NS + "isFamily");
+                Property generateProp = model.getProperty(TEMPLATE_NAMESPACE + "supportsLanguage");
+                Resource languageResource = (Resource) template.getProperty(generateProp).getObject();
+                Resource languageFamilyResource = (Resource) languageResource.getProperty(langFamilyProp).getObject();
+                String languageFamilyCode = languageFamilyResource.getLocalName();
+                LanguageFamily langFamily = new LanguageFamily(languageFamilyCode);
+                lang.setLangFamily(langFamily);
+            }
+        }
+
 
         //creating template
         List<TemplatePortion> templateWords = new ArrayList<>(Arrays.asList(actualWords));
         Template actualTemplate = new Template(templateWords);
-        actualTemplate.setLanguageFamily(languageFamily);
+        actualTemplate.setLanguage(lang);
+        actualTemplate.setSerialisedName(templateName);
 
         return actualTemplate;
     }
@@ -324,6 +376,7 @@ public class TemplateReader {
                 }
             }
         }
+        ((TemplatePortion) slotFiller).setSerialisedName(someResource.getLocalName());
         return slotFiller;
     }
 
@@ -473,6 +526,7 @@ public class TemplateReader {
             }
 
         }
+        finalWord.setSerialisedName(lexicalItemResource.getLocalName());
         return finalWord;
     }
 
@@ -563,6 +617,8 @@ public class TemplateReader {
                 break;
             }
         }
+
+        finalMorpheme.setSerialisedName(subLexicalResource.getLocalName());
 
         return finalMorpheme;
     }
