@@ -23,7 +23,7 @@ Here's an example of a method, taken from the OWLSIZ verbaliser, that demonstrat
 
 In the event that the above code is a bit confusing, then consider the following:
 
-Support you have created a template, serialised it using turtle, and stored it in a file called `Templates/template1.1.ttl`. Inside the template, you have instance of a ToCT template that you have called `templ1.1`. Then in order to load it, you would use the following:
+Suppose that you have created a template, serialised it using turtle, and stored it in a file called `Templates/template1.1.ttl`. Inside the template, you have instance of a ToCT template that you have called `templ1.1`. Then in order to load it, you would use the following:
 
 
     String templatePath = "Templates/template1.1.ttl";
