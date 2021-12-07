@@ -56,6 +56,10 @@ public class PolymorphicWord extends Chimera {
         this.dependsOnWordResources.add(dependsOnWordResource);
     }*/
 
+    public List<String> getItemsItReliesOn() {
+        return reliesOnLabels;
+    }
+
     public boolean doesReliesOnSomething() {
         return reliesOnLabels != null && reliesOnLabels.size() > 0;
     }
@@ -175,6 +179,15 @@ public class PolymorphicWord extends Chimera {
             }
         }
         return morphemes;
+    }
+
+    public InternalSlotRootAffix getFirstItem() {
+        return getItemAt(0);
+    }
+
+    public InternalSlotRootAffix getLastItem() {
+        int size = getAllMorphemes().size();
+        return getItemAt(size-1);
     }
 
     public InternalSlotRootAffix getItemAt(int index) {

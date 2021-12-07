@@ -72,10 +72,12 @@ public class UnimorphicWord extends Word {
         this.providesForResources = providesForResources;
     }
 
+    @Deprecated
     public String getIdentification() {
         return identification;
     }
 
+    @Deprecated
     public void setIdentification(String id) {
         this.identification = id;
     }
