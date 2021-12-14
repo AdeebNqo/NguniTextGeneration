@@ -12,13 +12,22 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            testParseTemplate();
-            testParseTemplates();
-            testNextPartInATemplate();
-            testZuluUtils();
-            testSaveTemplate();
+//            testParseTemplate();
+//            testParseTemplates();
+//            testNextPartInATemplate();
+//            testZuluUtils();
+//            testSaveTemplate();
+                testGetTemplateURIs();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void testGetTemplateURIs() {
+        String templatePath = "/tmp/template1.1.ttl";
+        Collection<String> uris = TemplateReader.getTemplateURIs(templatePath);
+        for (String uri: uris) {
+            System.out.println(uri);
         }
     }
 

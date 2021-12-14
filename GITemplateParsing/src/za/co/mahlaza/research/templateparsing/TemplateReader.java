@@ -1,14 +1,8 @@
 package za.co.mahlaza.research.templateparsing;
 
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.Property;
-import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.rdf.model.Statement;
-import org.apache.jena.rdf.model.ResIterator;
+import org.apache.jena.rdf.model.*;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.util.FileManager;
-import org.apache.jena.rdf.model.StmtIterator;
 import za.co.mahlaza.research.grammarengine.base.interfaces.SlotFiller;
 import za.co.mahlaza.research.grammarengine.base.models.feature.Feature;
 import za.co.mahlaza.research.grammarengine.base.models.feature.FeatureParser;
@@ -36,6 +30,27 @@ public class TemplateReader {
 
     public static void setTemplateOntologyNamespace(String namespace) {
         TEMPLATE_NAMESPACE = namespace;
+    }
+
+    public static Collection<String> getTemplateURIs(String templateFilename) {
+        Collection<String> uris = new LinkedList<>();
+
+        Model model = RDFDataMgr.loadModel(templateFilename);
+        Property isa = model.createProperty(RDF_NS + "type");
+        Resource templateType = model.createResource(ToCT_NS + "Template");
+        StmtIterator sIt = model.listStatements(null, isa, templateType);
+        while (sIt.hasNext()) {
+            Statement stmt = sIt.next();
+            Resource res = stmt.getSubject();
+            String fullURI = res.getURI();
+            String localname = res.getLocalName();
+            String modifiedURI = fullURI.replace(localname, "");
+            if (!uris.contains(modifiedURI)) {
+                uris.add(modifiedURI);
+            }
+        }
+
+        return uris;
     }
 
     public static Collection<Template> parseTemplates(String baseURI, String templateFilename) throws Exception {
