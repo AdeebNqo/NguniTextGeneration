@@ -47,6 +47,16 @@ You can manipulate the template in memory and then save a template object (or te
         
         TemplateWriter.saveTemplate(template, templateURI, outputFilename1);
         TemplateWriter.saveTemplates(template, templateURI, outputFilename2);
+        
+# Loading a template from a file with no present URI
+
+In the event that you want to parse a template file, that may include multiple templates, but do not want to hardcode the templates' URI then you can retrieve your templates in the following manner:
+
+    String templateFilename = ...
+    Collection<String> templateURIs = TemplateReader.getTemplateURIs(templateFilename)
+    for (String uri: uris) {
+        Collection<Template> templates = TemplateReader.parseTemplates(uri, templateFilename);
+    }
 
 # Which module to add to your code
 
