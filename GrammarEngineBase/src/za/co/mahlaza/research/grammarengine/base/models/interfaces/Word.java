@@ -5,4 +5,5 @@ import za.co.mahlaza.research.grammarengine.base.models.template.TemplatePortion
 
 public abstract class Word extends TemplatePortion implements SlotFiller {
     public abstract String getValue();
+    public abstract void setValue(String value);
 }
