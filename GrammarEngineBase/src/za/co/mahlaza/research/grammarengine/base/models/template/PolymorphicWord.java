@@ -181,6 +181,18 @@ public class PolymorphicWord extends Chimera {
         return morphemes;
     }
 
+    public void addMorpheme(InternalSlotRootAffix someMorpheme) {
+        wordPortions.add(someMorpheme);
+    }
+
+    public void removeMorpheme(InternalSlotRootAffix someMorpheme) {
+        wordPortions.remove(someMorpheme);
+    }
+
+    public void removeMorpheme(int indexOfMorpheme) {
+        wordPortions.remove(indexOfMorpheme);
+    }
+
     public InternalSlotRootAffix getFirstItem() {
         return getItemAt(0);
     }
