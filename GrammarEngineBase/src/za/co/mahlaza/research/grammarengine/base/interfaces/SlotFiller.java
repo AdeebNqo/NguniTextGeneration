@@ -8,6 +8,7 @@ public interface SlotFiller {
     void addSlotItCanFill(String slotName);
     List<String> getSlotsItCanFill();
     String getValue();
+    void setValue(String value);
     List<Feature> getFeatures();
     void setFeatures(List<Feature> features);
 

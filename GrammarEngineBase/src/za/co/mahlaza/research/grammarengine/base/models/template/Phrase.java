@@ -56,6 +56,11 @@ public class Phrase extends TemplatePortion implements SlotFiller {
     }
 
     @Override
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    @Override
     public List<Feature> getFeatures() {
         return features;
     }
