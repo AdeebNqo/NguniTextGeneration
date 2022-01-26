@@ -26,12 +26,12 @@ public class TemplateWriter {
     }
 
     public static void saveTemplate(Template template, String templateURI, String filename) throws Exception {
-        Collection<Template> templates = new LinkedList<>();
+        List<Template> templates = new LinkedList<>();
         templates.add(template);
         saveTemplates(templates, templateURI, filename);
     }
 
-    public static void saveTemplates(Collection<Template> templates, String templatesURI, String filename) throws Exception {
+    public static void saveTemplates(List<Template> templates, String templatesURI, String filename) throws Exception {
         Model model = ModelFactory.createDefaultModel();
 
         for (Template template : templates) {
@@ -43,7 +43,7 @@ public class TemplateWriter {
         saveTemplates(templates, templatesURI, out);
     }
 
-    public static void saveTemplates(Collection<Template> templates, String templatesURI, Writer writer) throws Exception {
+    public static void saveTemplates(List<Template> templates, String templatesURI, Writer writer) throws Exception {
         Model model = ModelFactory.createDefaultModel();
 
         for (Template template : templates) {
@@ -141,11 +141,13 @@ public class TemplateWriter {
         //creating language
         Property generateProp = model.getProperty(ToCT_NS + "supportsLanguage");
         Languoid lang = template.getLanguage();
-        Resource langRes = model.createResource(templatesURI + lang.getSerialisedName());
-        addMolaType(langRes, lang, model);
-        templateRes.addProperty(generateProp, langRes);
+        if (lang != null) {
+            Resource langRes = model.createResource(templatesURI + lang.getSerialisedName());
+            addMolaType(langRes, lang, model);
+            templateRes.addProperty(generateProp, langRes);
+        }
 
-        List<TemplatePortion> portions = template.words;
+        List<TemplatePortion> portions = template.getTemplatePortions();
         List<Resource> wordResources = new ArrayList<>(portions.size());
 
 
@@ -173,7 +175,7 @@ public class TemplateWriter {
             //creating the last word
             if (portions.size() > 1) {
                 TemplatePortion lastWord = portions.get(portions.size() - 1);
-                Resource lastItemRes = model.createResource(templatesURI + firstWord.getSerialisedName());
+                Resource lastItemRes = model.createResource(templatesURI + lastWord.getSerialisedName());
                 attachValueAndLabel(lastItemRes, lastWord, templatesURI, model);
                 wordResources.add(lastItemRes);
                 addPolymorphicWordFragments(lastItemRes, lastWord, templatesURI, model);

@@ -1,12 +1,20 @@
 import za.co.mahlaza.research.TemplateErrorDetector;
 import za.co.mahlaza.research.errordetection.models.TemplateValidationReport;
+import za.co.mahlaza.research.grammarengine.base.models.template.Phrase;
+import za.co.mahlaza.research.grammarengine.base.models.template.Punctuation;
 import za.co.mahlaza.research.grammarengine.base.models.template.Template;
+import za.co.mahlaza.research.grammarengine.base.models.template.TemplatePortion;
 import za.co.mahlaza.research.grammarengine.nguni.zu.ZuluFeatureParser;
 import za.co.mahlaza.research.grammarengine.nguni.zu.ZuluUtils;
 import za.co.mahlaza.research.templateparsing.TemplateReader;
 import za.co.mahlaza.research.templateparsing.TemplateWriter;
 import za.co.mahlaza.research.templateparsing.URIS;
+
+import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Main {
 
@@ -18,6 +26,7 @@ public class Main {
             testZuluUtils();
             testSaveTemplate();
             testGetTemplateURIs();
+            testSaveShortTemplate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -28,6 +37,32 @@ public class Main {
         Collection<String> uris = TemplateReader.getTemplateURIs(templatePath);
         for (String uri: uris) {
             System.out.println(uri);
+        }
+    }
+
+    public static void testSaveShortTemplate() {
+        System.out.println("INSide testSaveShortTemplate");
+        String templateURI = "http://people.cs.uct.ac.za/~zmahlaza/templates/testing/";
+        List<TemplatePortion> words = new LinkedList<>();
+
+        Punctuation p1 = new Punctuation(","); p1.setSerialisedName("p1");
+        Punctuation p2 = new Punctuation("."); p2.setSerialisedName("p888");
+        p1.setNextPart(p2);
+        words.add(p1);
+        words.add(p2);
+
+        Template templ = new Template(words);
+        templ.setURI(templateURI);
+        templ.setSerialisedName("templateTest");
+
+        List<Template> templates = new LinkedList<>();
+        templates.add(templ);
+
+        PrintWriter writer = new PrintWriter(System.out);
+        try {
+            TemplateWriter.saveTemplates(templates, templateURI, writer);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
