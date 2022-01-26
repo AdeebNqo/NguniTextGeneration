@@ -176,6 +176,7 @@ public class TemplateReader {
         Template actualTemplate = new Template(templateWords);
         actualTemplate.setLanguage(lang);
         actualTemplate.setSerialisedName(templateName);
+        actualTemplate.setURI(baseNamespace);
 
         return actualTemplate;
     }

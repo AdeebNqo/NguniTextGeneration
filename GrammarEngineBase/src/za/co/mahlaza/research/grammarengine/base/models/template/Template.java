@@ -1,6 +1,7 @@
 package za.co.mahlaza.research.grammarengine.base.models.template;
 
 import za.co.mahlaza.research.grammarengine.base.interfaces.SlotFiller;
+import za.co.mahlaza.research.grammarengine.base.models.annotations.RelationSetter;
 import za.co.mahlaza.research.grammarengine.base.models.interfaces.Word;
 import za.co.mahlaza.research.grammarengine.base.models.mola.Languoid;
 
@@ -16,6 +17,7 @@ public class Template {
 
     public List<TemplatePortion> words;
     public Languoid language;
+    public String URI;
 
     public Template(List<TemplatePortion> words) {
         this.words = words;
@@ -27,9 +29,24 @@ public class Template {
         }
     }
 
-
     public List<TemplatePortion> getTemplatePortions() {
         return words;
+    }
+
+    public void addTemplatePortion(TemplatePortion templatePortion) {
+        words.add(templatePortion);
+    }
+
+    public TemplatePortion getPortionAt(int index) {
+        return words.get(index);
+    }
+
+    public void setURI(String URI) {
+        this.URI = URI;
+    }
+
+    public String getURI() {
+        return URI;
     }
 
     public List<UnimorphicWord> getUnimorphicWords() {
@@ -126,6 +143,7 @@ public class Template {
         return language;
     }
 
+    @RelationSetter(RangeName = "Name")
     public void setSerialisedName(String name) {
         serialisedName = name;
     }
@@ -137,15 +155,17 @@ public class Template {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < words.size()-1; i++) {
-            sb.append(words.get(i));
-            if (TEMPLATE_SPEC_OMITTED_SPACES) {
-                if (!(words.get(i + 1) instanceof Punctuation) && !(words.get(i) instanceof Punctuation)) {
-                    sb.append(" ");
+        if (words != null && !words.isEmpty()) {
+            for (int i = 0; i < words.size()-1; i++) {
+                sb.append(words.get(i));
+                if (TEMPLATE_SPEC_OMITTED_SPACES) {
+                    if (!(words.get(i + 1) instanceof Punctuation) && !(words.get(i) instanceof Punctuation)) {
+                        sb.append(" ");
+                    }
                 }
             }
+            sb.append(words.get(words.size()-1));
         }
-        sb.append(words.get(words.size()-1));
         return sb.toString();
     }
 }

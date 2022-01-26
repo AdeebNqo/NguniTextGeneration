@@ -10,6 +10,7 @@ import za.co.mahlaza.research.grammarengine.base.models.mola.*;
 import za.co.mahlaza.research.grammarengine.base.models.template.*;
 
 import java.io.FileWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -39,8 +40,19 @@ public class TemplateWriter {
         }
 
         FileWriter out = new FileWriter(filename);
-        model.write(out, "Turtle") ;
-        out.close();
+        saveTemplates(templates, templatesURI, out);
+    }
+
+    public static void saveTemplates(Collection<Template> templates, String templatesURI, Writer writer) throws Exception {
+        Model model = ModelFactory.createDefaultModel();
+
+        for (Template template : templates) {
+            Resource templateRes = model.createResource(templatesURI + template.getSerialisedName());
+            addLanguageAndTemplateFragments(templateRes, template, templatesURI, model);
+        }
+
+        model.write(writer, "Turtle") ;
+        writer.close();
     }
 
     private static void attachValueAndLabel(Resource wordResource, TemplatePortion word, String templatesURI, Model model) {
@@ -122,6 +134,10 @@ public class TemplateWriter {
     }
 
     private static void addLanguageAndTemplateFragments(Resource templateRes, Template template, String templatesURI, Model model) {
+        //creating template
+        Property typeProp = model.getProperty(RDF_NS+ "type");
+        templateRes.addProperty(typeProp, ToCT_NS + "Template");
+
         //creating language
         Property generateProp = model.getProperty(ToCT_NS + "supportsLanguage");
         Languoid lang = template.getLanguage();
@@ -132,37 +148,44 @@ public class TemplateWriter {
         List<TemplatePortion> portions = template.words;
         List<Resource> wordResources = new ArrayList<>(portions.size());
 
-        //creating the first word
-        TemplatePortion firstWord = portions.get(0);
-        Resource firstItemRes = model.createResource(templatesURI + firstWord.getSerialisedName());
-        attachValueAndLabel(firstItemRes, firstWord, templatesURI, model);
-        wordResources.add(firstItemRes);
-        Property firstItemPropToct = model.getProperty(ToCT_NS + "hasFirstPart");
-        templateRes.addProperty(firstItemPropToct, firstItemRes);
-        addPolymorphicWordFragments(firstItemRes, firstWord, templatesURI, model);
 
-        //creating middle words
-        for (int index = 1; index < portions.size()-1; ++index) {
-            TemplatePortion midWord = portions.get(index);
-            Resource midWordRes = model.createResource(templatesURI + midWord.getSerialisedName());
-            attachValueAndLabel(midWordRes, midWord, templatesURI, model);
-            wordResources.add(midWordRes);
-            addPolymorphicWordFragments(midWordRes, midWord, templatesURI, model);
-        }
+        if (portions.size() > 0) {
+            //creating the first word
+            TemplatePortion firstWord = portions.get(0);
+            Resource firstItemRes = model.createResource(templatesURI + firstWord.getSerialisedName());
+            attachValueAndLabel(firstItemRes, firstWord, templatesURI, model);
+            wordResources.add(firstItemRes);
+            Property firstItemPropToct = model.getProperty(ToCT_NS + "hasFirstPart");
+            templateRes.addProperty(firstItemPropToct, firstItemRes);
+            addPolymorphicWordFragments(firstItemRes, firstWord, templatesURI, model);
 
-        //creating the last word
-        TemplatePortion lastWord = portions.get(portions.size()-1);
-        Resource lastItemRes = model.createResource(templatesURI + firstWord.getSerialisedName());
-        attachValueAndLabel(lastItemRes, lastWord, templatesURI, model);
-        wordResources.add(lastItemRes);
-        addPolymorphicWordFragments(lastItemRes, lastWord, templatesURI, model);
+            //creating middle words
+            if (portions.size() > 1) {
+                for (int index = 1; index < portions.size() - 1; ++index) {
+                    TemplatePortion midWord = portions.get(index);
+                    Resource midWordRes = model.createResource(templatesURI + midWord.getSerialisedName());
+                    attachValueAndLabel(midWordRes, midWord, templatesURI, model);
+                    wordResources.add(midWordRes);
+                    addPolymorphicWordFragments(midWordRes, midWord, templatesURI, model);
+                }
+            }
 
-        //setting the order of the words
-        for (int index=0; index < wordResources.size()-1; ++index) {
-            Resource curr = wordResources.get(index);
-            Resource next = wordResources.get(index+1);
-            Property nextWordToCtProp = model.getProperty(ToCT_NS + "hasNextPart");
-            curr.addProperty(nextWordToCtProp, next);
+            //creating the last word
+            if (portions.size() > 1) {
+                TemplatePortion lastWord = portions.get(portions.size() - 1);
+                Resource lastItemRes = model.createResource(templatesURI + firstWord.getSerialisedName());
+                attachValueAndLabel(lastItemRes, lastWord, templatesURI, model);
+                wordResources.add(lastItemRes);
+                addPolymorphicWordFragments(lastItemRes, lastWord, templatesURI, model);
+            }
+
+            //setting the order of the words
+            for (int index = 0; index < wordResources.size() - 1; ++index) {
+                Resource curr = wordResources.get(index);
+                Resource next = wordResources.get(index + 1);
+                Property nextWordToCtProp = model.getProperty(ToCT_NS + "hasNextPart");
+                curr.addProperty(nextWordToCtProp, next);
+            }
         }
     }
 

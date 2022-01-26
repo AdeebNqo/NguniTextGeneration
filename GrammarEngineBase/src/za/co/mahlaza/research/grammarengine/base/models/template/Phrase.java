@@ -1,6 +1,7 @@
 package za.co.mahlaza.research.grammarengine.base.models.template;
 
 import za.co.mahlaza.research.grammarengine.base.interfaces.SlotFiller;
+import za.co.mahlaza.research.grammarengine.base.models.annotations.RelationSetter;
 import za.co.mahlaza.research.grammarengine.base.models.interfaces.Word;
 import za.co.mahlaza.research.grammarengine.base.models.feature.Feature;
 

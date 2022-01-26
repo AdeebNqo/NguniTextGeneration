@@ -1,6 +1,7 @@
 package za.co.mahlaza.research.grammarengine.base.models.template;
 
 import za.co.mahlaza.research.grammarengine.base.interfaces.SlotFiller;
+import za.co.mahlaza.research.grammarengine.base.models.annotations.RelationSetter;
 import za.co.mahlaza.research.grammarengine.base.models.interfaces.InternalSlotRootAffix;
 import za.co.mahlaza.research.grammarengine.base.models.feature.ConcordType;
 import za.co.mahlaza.research.grammarengine.base.models.feature.Feature;
@@ -47,6 +48,7 @@ public class Concord extends Affix implements InternalSlotRootAffix {
         return value;
     }
 
+    @RelationSetter(RangeName = "Value", RdfName = "hasValue")
     public void setValue(String value) {
         this.value = value;
     }

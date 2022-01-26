@@ -1,6 +1,7 @@
 package za.co.mahlaza.research.grammarengine.base.models.template;
 
 
+import za.co.mahlaza.research.grammarengine.base.models.annotations.RelationSetter;
 import za.co.mahlaza.research.grammarengine.base.models.interfaces.InternalSlotRootAffix;
 import za.co.mahlaza.research.grammarengine.base.models.feature.Feature;
 
@@ -37,6 +38,7 @@ public class Copula extends Affix implements InternalSlotRootAffix {
         return toString();
     }
 
+    @RelationSetter(RangeName = "Value", RdfName = "hasValue")
     public void setValue(String value) {
         this.value = value;
     }
