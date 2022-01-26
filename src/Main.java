@@ -20,12 +20,12 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            testParseTemplate();
-            testParseTemplates();
-            testNextPartInATemplate();
-            testZuluUtils();
-            testSaveTemplate();
-            testGetTemplateURIs();
+//            testParseTemplate();
+//            testParseTemplates();
+//            testNextPartInATemplate();
+//            testZuluUtils();
+//            testSaveTemplate();
+//            testGetTemplateURIs();
             testSaveShortTemplate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,6 +50,9 @@ public class Main {
         p1.setNextPart(p2);
         words.add(p1);
         words.add(p2);
+
+        Phrase p3 = new Phrase("Hello"); p3.setSerialisedName("somePhrase");
+        words.add(p3);
 
         Template templ = new Template(words);
         templ.setURI(templateURI);

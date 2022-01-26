@@ -52,11 +52,10 @@ public class TemplateWriter {
         }
 
         model.write(writer, "Turtle") ;
-        writer.close();
     }
 
     private static void attachValueAndLabel(Resource wordResource, TemplatePortion word, String templatesURI, Model model) {
-        Property valueProp = model.getProperty(templatesURI + "hasValue");
+        Property valueProp = model.getProperty(ToCT_NS + "hasValue");
         if (word instanceof SlotFiller) {
             String value = ((SlotFiller) word).getValue();
             if (value != null && !value.isEmpty()) {
@@ -68,9 +67,14 @@ public class TemplateWriter {
             if (value != null && !value.isEmpty()) {
                 wordResource.addLiteral(valueProp, value);
             }
+        } else if (word instanceof Punctuation) {
+            String value = ((Punctuation) word).getValue();
+            if (value != null && !value.isEmpty()) {
+                wordResource.addLiteral(valueProp, value);
+            }
         }
         if (word instanceof Slot) {
-            Property hasLabel = model.getProperty(templatesURI + "hasLabel");
+            Property hasLabel = model.getProperty(ToCT_NS + "hasLabel");
             wordResource.addLiteral(hasLabel, ((Slot) word).getLabel());
         }
         attachToCTType(wordResource, word, model);
