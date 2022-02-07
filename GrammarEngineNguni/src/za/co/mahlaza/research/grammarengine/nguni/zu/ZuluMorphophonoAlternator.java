@@ -6,6 +6,8 @@ import za.co.mahlaza.research.grammarengine.nguni.VowelPosition;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 public class ZuluMorphophonoAlternator  implements MorphophonoAlternator {
 
@@ -17,12 +19,14 @@ public class ZuluMorphophonoAlternator  implements MorphophonoAlternator {
 
     @Override
     public String joinMorpheme(String leftMorpheme, String rightMorpheme) {
-        String result;
+        String result = "";
         if (isConditioningNeeded(leftMorpheme, rightMorpheme)) {
             char leftChar = leftMorpheme.charAt(leftMorpheme.length()-1);
             char rightChar = rightMorpheme.charAt(0);
             Queue<String> vals = mutate(leftChar, rightChar, leftMorpheme, rightMorpheme);
-            result =  vals.poll() + vals.poll() + vals.poll();
+            for (String val : vals) {
+                result +=  val;
+            }
         } else {
             result = leftMorpheme + rightMorpheme;
         }
@@ -32,7 +36,22 @@ public class ZuluMorphophonoAlternator  implements MorphophonoAlternator {
     public boolean isConditioningNeeded(String left, String right) {
         char leftEnd = left.charAt(left.length()-1);
         char rightStart = right.charAt(0);
-        return vowelDetector.isVowel(leftEnd) && vowelDetector.isVowel(rightStart);
+        boolean vowelsFollowEachOTher = vowelDetector.isVowel(leftEnd) && vowelDetector.isVowel(rightStart);
+
+        if (vowelsFollowEachOTher) {
+            return true;
+        }
+        else {
+            if (left.length() > 1 && left.matches(".*n[aeiou]")) {
+                String[] leadRightMorphemes = {"b", "f", "s", "v", "z", "dl", "hl", "kh", "sh", "th"};
+                for (String leadMorpheme : leadRightMorphemes) {
+                    if (right.startsWith(leadMorpheme)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     private Queue<String> mutate(char leftChar, char rightChar, String leftMorpheme, String rightMorpheme) {
@@ -51,8 +70,64 @@ public class ZuluMorphophonoAlternator  implements MorphophonoAlternator {
         String newLeftMorpheme = leftMorpheme.substring(0, leftMorpheme.length() - 1);
         String newRightMorpheme = rightMorpheme.substring(1);
 
+        //Taken from two sources:
+        //P.E Raper, The Zulu Language, Acta Academia
+        //S. Naidoo, Intrusive stop formation in Zulu: an application of feature geometry theory, Stellenbosch Uni., 2005
+        String[] leadRightMorphemes = {"b", "f", "s", "v", "z", "dl", "hl", "kh", "sh", "th"};
+        if (leftMorpheme.length() > 1 && leftMorpheme.matches(".*n[aeiou]") && Stream.of(leadRightMorphemes).anyMatch(lead -> rightMorpheme.startsWith(lead))) {
+            if (rightMorpheme.startsWith("b")) {
+                result.add(leftMorpheme);
+                result.add("mb");
+                result.add(rightMorpheme.substring(1));
+            }
+            else if (rightMorpheme.startsWith("f")) {
+                result.add(leftMorpheme);
+                result.add("mf");
+                result.add(rightMorpheme.substring(1));
+            }
+            else if (rightMorpheme.startsWith("s")) {
+                result.add(leftMorpheme);
+                result.add("ns");
+                result.add(rightMorpheme.substring(1));
+            }
+            else if (rightMorpheme.startsWith("v")) {
+                result.add(leftMorpheme);
+                result.add("mv");
+                result.add(rightMorpheme.substring(1));
+            }
+            else if (rightMorpheme.startsWith("z")) {
+                result.add(leftMorpheme);
+                result.add("nz");
+                result.add(rightMorpheme.substring(1));
+            }
+            else if (rightMorpheme.startsWith("dl")) {
+                result.add(leftMorpheme);
+                result.add("ndl");
+                result.add(rightMorpheme.substring(2));
+            }
+            else if (rightMorpheme.startsWith("hl")) {
+                result.add(leftMorpheme);
+                result.add("nhl");
+                result.add(rightMorpheme.substring(2));
+            }
+            else if (rightMorpheme.startsWith("kh")) {
+                result.add(leftMorpheme);
+                result.add("nk");
+                result.add(rightMorpheme.substring(2));
+            }
+            else if (rightMorpheme.startsWith("sh")) {
+                result.add(leftMorpheme);
+                result.add("ntsh");
+                result.add(rightMorpheme.substring(2));
+            }
+            else if (rightMorpheme.startsWith("th")) {
+                result.add(leftMorpheme);
+                result.add("nt");
+                result.add(rightMorpheme.substring(2));
+            }
+        }
         //Galen Sibanda's basic gliding
-        if (leftChar=='i' && rightChar=='e') {
+        else if (leftChar=='i' && rightChar=='e') {
             result.add(newLeftMorpheme);
             //Gliding with Consonant
             if (secondLastLeftChar!='\0' &&!vowelDetector.isVowel(secondLastLeftChar)) {

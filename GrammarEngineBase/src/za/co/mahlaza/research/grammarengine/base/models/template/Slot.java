@@ -49,6 +49,11 @@ public class Slot extends TemplatePortion implements InternalSlotOrWordPortion, 
         return label;
     }
 
+    @RelationSetter(RangeName = "Label", RdfName = "hasLabel")
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
     @RelationSetter(RangeName = "Value", RdfName = "hasValue")
     public void setValue(String value) {
         this.value = value;

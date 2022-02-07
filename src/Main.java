@@ -5,6 +5,7 @@ import za.co.mahlaza.research.grammarengine.base.models.template.Punctuation;
 import za.co.mahlaza.research.grammarengine.base.models.template.Template;
 import za.co.mahlaza.research.grammarengine.base.models.template.TemplatePortion;
 import za.co.mahlaza.research.grammarengine.nguni.zu.ZuluFeatureParser;
+import za.co.mahlaza.research.grammarengine.nguni.zu.ZuluMorphophonoAlternator;
 import za.co.mahlaza.research.grammarengine.nguni.zu.ZuluUtils;
 import za.co.mahlaza.research.templateparsing.TemplateReader;
 import za.co.mahlaza.research.templateparsing.TemplateWriter;
@@ -26,10 +27,20 @@ public class Main {
 //            testZuluUtils();
 //            testSaveTemplate();
 //            testGetTemplateURIs();
-            testSaveShortTemplate();
+//            testSaveShortTemplate();
+            testMorphemeStopFormation();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void testMorphemeStopFormation() {
+        String lMorpheme = "na";
+        String rMorpheme = "hlanu";
+        System.out.println("Testing the combination of "+lMorpheme+" and "+rMorpheme);
+
+        ZuluMorphophonoAlternator morphophonoAlternator = new ZuluMorphophonoAlternator();
+        System.out.println("Outcome = "+morphophonoAlternator.joinMorpheme(lMorpheme, rMorpheme));
     }
 
     public static void testGetTemplateURIs() {

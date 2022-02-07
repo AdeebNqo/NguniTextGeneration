@@ -41,6 +41,7 @@ public class TemplateWriter {
 
         FileWriter out = new FileWriter(filename);
         saveTemplates(templates, templatesURI, out);
+        out.close();
     }
 
     public static void saveTemplates(List<Template> templates, String templatesURI, Writer writer) throws Exception {

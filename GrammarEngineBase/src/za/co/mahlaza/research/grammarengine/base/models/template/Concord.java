@@ -57,6 +57,11 @@ public class Concord extends Affix implements InternalSlotRootAffix {
         return label;
     }
 
+    @RelationSetter(RangeName = "Label", RdfName = "hasLabel")
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
     public ConcordType getConcordType() {
         for (Feature feature : featureList) {
             if (feature instanceof ConcordType) {
