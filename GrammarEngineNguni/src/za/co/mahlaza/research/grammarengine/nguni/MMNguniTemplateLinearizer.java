@@ -312,8 +312,13 @@ public class MMNguniTemplateLinearizer implements TemplateLinearizer {
             if (leftValue == null) {
                 leftValue = leftMorph.getValue();
             }
-            String newMorphValue = morphophonoAlternator.joinMorpheme(leftValue, rightMorph.getValue());
-             leftValue = newMorphValue;
+            try {
+                String newMorphValue = morphophonoAlternator.joinMorpheme(leftValue, rightMorph.getValue());
+                leftValue = newMorphValue;
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return leftValue;
     }

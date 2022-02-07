@@ -40,7 +40,11 @@ public class Main {
         System.out.println("Testing the combination of "+lMorpheme+" and "+rMorpheme);
 
         ZuluMorphophonoAlternator morphophonoAlternator = new ZuluMorphophonoAlternator();
-        System.out.println("Outcome = "+morphophonoAlternator.joinMorpheme(lMorpheme, rMorpheme));
+        try {
+            System.out.println("Outcome = "+morphophonoAlternator.joinMorpheme(lMorpheme, rMorpheme));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void testGetTemplateURIs() {

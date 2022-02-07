@@ -18,7 +18,11 @@ public class ZuluMorphophonoAlternator  implements MorphophonoAlternator {
     }
 
     @Override
-    public String joinMorpheme(String leftMorpheme, String rightMorpheme) {
+    public String joinMorpheme(String leftMorpheme, String rightMorpheme) throws Exception {
+        if (leftMorpheme == null || rightMorpheme == null) {
+            throw new NullPointerException("The left or rightmorpheme are currently null. You cannot append null.");
+        }
+
         String result = "";
         if (isConditioningNeeded(leftMorpheme, rightMorpheme)) {
             char leftChar = leftMorpheme.charAt(leftMorpheme.length()-1);
@@ -34,6 +38,10 @@ public class ZuluMorphophonoAlternator  implements MorphophonoAlternator {
     }
 
     public boolean isConditioningNeeded(String left, String right) {
+        if (left.isEmpty() || right.isEmpty()) {
+            return false;
+        }
+
         char leftEnd = left.charAt(left.length()-1);
         char rightStart = right.charAt(0);
         boolean vowelsFollowEachOTher = vowelDetector.isVowel(leftEnd) && vowelDetector.isVowel(rightStart);
