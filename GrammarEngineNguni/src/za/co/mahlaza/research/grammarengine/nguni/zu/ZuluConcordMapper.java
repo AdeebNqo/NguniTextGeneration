@@ -128,24 +128,23 @@ public class ZuluConcordMapper implements ConcordMapper {
         enumerativeConconrds.put("11", "lu");
         enumerativeConconrds.put("14", "bu");
         enumerativeConconrds.put("15", "ku");
-        //negative subject concords
-        //TODO: implement the concords
-        negativeSubjectConcords.put("1", "??");
-        negativeSubjectConcords.put("2", "??");
-        negativeSubjectConcords.put("1a", "??");
-        negativeSubjectConcords.put("2a", "??");
-        negativeSubjectConcords.put("3a", "??");
-        negativeSubjectConcords.put("3", "??");
-        negativeSubjectConcords.put("4", "??");
-        negativeSubjectConcords.put("5", "??");
-        negativeSubjectConcords.put("6", "??");
-        negativeSubjectConcords.put("7", "??");
-        negativeSubjectConcords.put("8", "??");
-        negativeSubjectConcords.put("9", "??");
-        negativeSubjectConcords.put("10", "??");
-        negativeSubjectConcords.put("11", "??");
-        negativeSubjectConcords.put("14", "??");
-        negativeSubjectConcords.put("15", "??");
+        //negative subject concords -  sourced from C. Maria Keet "The isiZulu verbalisation algorithms: design and documentation"
+        negativeSubjectConcords.put("1", "aka");
+        negativeSubjectConcords.put("2", "aba");
+        negativeSubjectConcords.put("1a", "aka");
+        negativeSubjectConcords.put("2a", "aba");
+        negativeSubjectConcords.put("3a", "aka");
+        negativeSubjectConcords.put("3", "awu");
+        negativeSubjectConcords.put("4", "ayi");
+        negativeSubjectConcords.put("5", "ali");
+        negativeSubjectConcords.put("6", "awa");
+        negativeSubjectConcords.put("7", "asi");
+        negativeSubjectConcords.put("8", "azi");
+        negativeSubjectConcords.put("9", "ayi");
+        negativeSubjectConcords.put("10", "azi");
+        negativeSubjectConcords.put("11", "alu");
+        negativeSubjectConcords.put("14", "abu");
+        negativeSubjectConcords.put("15", "aku");
     }
 
     @Override
