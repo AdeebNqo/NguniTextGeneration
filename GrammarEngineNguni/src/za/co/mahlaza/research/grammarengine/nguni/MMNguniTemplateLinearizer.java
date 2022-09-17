@@ -310,10 +310,10 @@ public class MMNguniTemplateLinearizer implements TemplateLinearizer {
             InternalSlotRootAffix leftMorph = morphemes.get(i);
             InternalSlotRootAffix rightMorph = morphemes.get(i+1);
             if (leftValue == null) {
-                leftValue = leftMorph.getValue();
+                leftValue = leftMorph.toString();
             }
             try {
-                String newMorphValue = morphophonoAlternator.joinMorpheme(leftValue, rightMorph.getValue());
+                String newMorphValue = morphophonoAlternator.joinMorpheme(leftValue, rightMorph.toString());
                 leftValue = newMorphValue;
             }
             catch (Exception e) {

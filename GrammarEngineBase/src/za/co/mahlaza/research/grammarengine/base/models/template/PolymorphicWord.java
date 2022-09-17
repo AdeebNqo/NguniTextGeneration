@@ -217,7 +217,7 @@ public class PolymorphicWord extends Chimera {
             StringBuilder stringBuilder = new StringBuilder();
             List<InternalSlotRootAffix> morphemes = getAllMorphemes();
             for (InternalSlotRootAffix slotRootAffix: morphemes) {
-                stringBuilder.append(slotRootAffix.getValue());
+                stringBuilder.append(slotRootAffix.toString());
             }
             return stringBuilder.toString();
         }

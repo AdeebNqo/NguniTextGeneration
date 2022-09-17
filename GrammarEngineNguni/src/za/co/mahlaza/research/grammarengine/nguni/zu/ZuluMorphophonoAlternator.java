@@ -267,14 +267,44 @@ public class ZuluMorphophonoAlternator  implements MorphophonoAlternator {
             result.add("we");
             result.add(newRightMorpheme);
         }
-
+        //Lionel Posthumus' "The combination of a back vowel phoneme followed by a front vowel phoneme"
+        else if (leftChar=='o' && rightChar=='u') {
+            result.add(newLeftMorpheme);
+            result.add("u");
+            result.add(newRightMorpheme);
+        }
+        //Lionel Posthumus' "The combination of a back vowel phoneme followed by a front vowel phoneme"
+        else if (leftChar=='u' && rightChar=='o') {
+            result.add(newLeftMorpheme);
+            result.add("o"); //According to Lionel Posthumus, its supposed to be /wo/ however the /w/ is elided
+            result.add(newRightMorpheme);
+        }
+        //Lionel Posthumus' "The combination of a back vowel phoneme followed by a front vowel phoneme"
+        else if (leftChar=='i' && rightChar=='o') {
+            if (leftMorpheme.length() > 1) {
+                result.add(newLeftMorpheme);
+                result.add("o");
+                result.add(newRightMorpheme);
+            }
+            else {
+                result.add(newLeftMorpheme);
+                result.add("yo");
+                result.add(newRightMorpheme);
+            }
+        }
+        //Lionel Posthumus' "The combination of a back vowel phoneme followed by a front vowel phoneme"
+        else if (leftChar=='e' && rightChar=='o') {
+            result.add(newLeftMorpheme);
+            result.add("o");
+            result.add(newRightMorpheme);
+        }
         //The following two are Galen Sibanda's rules for 'o'
         else if (leftChar=='o' && rightChar=='a') {
             result.add(newLeftMorpheme);
             result.add("wa");
             result.add(newRightMorpheme);
         }
-        else if (leftChar=='0' && rightChar=='e') {
+        else if (leftChar=='o' && rightChar=='e') {
             result.add(newLeftMorpheme);
             result.add("we");
             result.add(newRightMorpheme);
