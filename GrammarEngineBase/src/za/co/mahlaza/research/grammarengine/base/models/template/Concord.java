@@ -7,6 +7,7 @@ import za.co.mahlaza.research.grammarengine.base.models.feature.ConcordType;
 import za.co.mahlaza.research.grammarengine.base.models.feature.Feature;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Concord extends Affix implements InternalSlotRootAffix {
 
@@ -51,6 +52,14 @@ public class Concord extends Affix implements InternalSlotRootAffix {
 
     public void addFeatures(List<Feature> someConcordFeatures) {
         someConcordFeatures.stream().forEach(feature -> addFeature(feature));
+    }
+
+    public void removeFeature(Feature someConcordFeature) {
+        featureList = featureList.stream().filter(feature -> !feature.equals(someConcordFeature)).collect(Collectors.toList());
+    }
+
+    public void removeFeatures(List<Feature> someConcordFeatures) {
+        someConcordFeatures.stream().forEach(feature -> removeFeature(feature));
     }
 
     @Override
