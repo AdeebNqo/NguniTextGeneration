@@ -43,6 +43,16 @@ public class Concord extends Affix implements InternalSlotRootAffix {
         this.identification = id;
     }
 
+    public void addFeature(Feature someConcordFeature) {
+        if (featureList != null) {
+            featureList.add(someConcordFeature);
+        }
+    }
+
+    public void addFeatures(List<Feature> someConcordFeatures) {
+        someConcordFeatures.stream().forEach(feature -> addFeature(feature));
+    }
+
     @Override
     public String getValue() {
         return value;
