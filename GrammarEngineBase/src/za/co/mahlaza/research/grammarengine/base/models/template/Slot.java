@@ -54,6 +54,7 @@ public class Slot extends TemplatePortion implements InternalSlotOrWordPortion, 
         this.label = label;
     }
 
+    @Deprecated
     @RelationSetter(RangeName = "Value", RdfName = "hasValue")
     public void setValue(String value) {
         this.value = value;
