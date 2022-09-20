@@ -35,7 +35,7 @@ public class PolymorphicWord extends Chimera {
         for (int index = 0; index < this.wordPortions.size()-1; ++index) {
             InternalSlotRootAffix curr = this.wordPortions.get(index);
             InternalSlotRootAffix next = this.wordPortions.get(index+1);
-            curr.setNextPart(next);
+            curr.setNextMorphPart(next);
         }
     }
 

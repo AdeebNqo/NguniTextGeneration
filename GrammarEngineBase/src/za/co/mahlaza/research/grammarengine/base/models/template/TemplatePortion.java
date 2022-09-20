@@ -6,12 +6,12 @@ public class TemplatePortion {
     public TemplatePortion nextPart;
     public String serialisedName;
 
-    public TemplatePortion getNextPart() {
+    public TemplatePortion getNextWordPart() {
         return nextPart;
     }
 
     @RelationSetter(RangeName = "Next Part", RdfName = "hasNextPart")
-    public void setNextPart(TemplatePortion portion) {
+    public void setNextWordPart(TemplatePortion portion) {
         nextPart = portion;
     }
 

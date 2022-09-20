@@ -46,7 +46,17 @@ public class AffixChunk extends WordPortion implements InternalSlotRootAffix {
     }
 
     @Override
-    public void setNextPart(InternalSlotRootAffix internalPart) {
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public InternalSlotRootAffix getNextMorphPart() {
+        return nextPart;
+    }
+
+    @Override
+    public void setNextMorphPart(InternalSlotRootAffix internalPart) {
         nextPart = internalPart;
     }
 

@@ -25,7 +25,7 @@ public class Template {
         for (int index = 0; index < words.size()-1; ++index) {
             TemplatePortion curr = this.words.get(index);
             TemplatePortion next = this.words.get(index+1);
-            curr.setNextPart(next);
+            curr.setNextWordPart(next);
         }
     }
 

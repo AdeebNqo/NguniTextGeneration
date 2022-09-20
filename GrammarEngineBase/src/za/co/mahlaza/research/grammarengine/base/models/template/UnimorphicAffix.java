@@ -25,6 +25,11 @@ public class UnimorphicAffix extends Affix implements InternalSlotRootAffix {
     }
 
     @Override
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    @Override
     public int getIndex() {
         return index;
     }
@@ -40,8 +45,13 @@ public class UnimorphicAffix extends Affix implements InternalSlotRootAffix {
     }
 
     @Override
-    public void setNextPart(InternalSlotRootAffix nextPart) {
+    public void setNextMorphPart(InternalSlotRootAffix nextPart) {
         this.nextPart = nextPart;
+    }
+
+    @Override
+    public InternalSlotRootAffix getNextMorphPart() {
+        return nextPart;
     }
 
     @Override

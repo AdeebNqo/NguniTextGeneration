@@ -17,6 +17,11 @@ public class Root extends WordPortion implements InternalSlotRootAffix {
     }
 
     @Override
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    @Override
     public String toString() {
         return value;
     }
@@ -27,8 +32,13 @@ public class Root extends WordPortion implements InternalSlotRootAffix {
     }
 
     @Override
-    public void setNextPart(InternalSlotRootAffix nextPart) {
+    public void setNextMorphPart(InternalSlotRootAffix nextPart) {
         this.nextPart = nextPart;
+    }
+
+    @Override
+    public InternalSlotRootAffix getNextMorphPart() {
+        return nextPart;
     }
 
     @Override

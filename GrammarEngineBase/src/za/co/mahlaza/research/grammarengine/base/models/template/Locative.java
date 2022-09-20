@@ -67,11 +67,11 @@ public class Locative extends Affix implements InternalSlotRootAffix {
         this.index = index;
     }
 
-    public InternalSlotRootAffix getNextPart() {
+    public InternalSlotRootAffix getNextMorphPart() {
         return nextPart;
     }
 
-    public void setNextPart(InternalSlotRootAffix nexPart) {
+    public void setNextMorphPart(InternalSlotRootAffix nexPart) {
         this.nextPart = nexPart;
     }
 

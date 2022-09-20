@@ -12,7 +12,6 @@ import za.co.mahlaza.research.templateparsing.TemplateWriter;
 import za.co.mahlaza.research.templateparsing.URIS;
 
 import java.io.PrintWriter;
-import java.io.Writer;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -62,7 +61,7 @@ public class Main {
 
         Punctuation p1 = new Punctuation(","); p1.setSerialisedName("p1");
         Punctuation p2 = new Punctuation("."); p2.setSerialisedName("p888");
-        p1.setNextPart(p2);
+        p1.setNextWordPart(p2);
         words.add(p1);
         words.add(p2);
 
@@ -111,8 +110,8 @@ public class Main {
         TemplateReader.Init(new ZuluFeatureParser());
         TemplateReader.setTemplateOntologyNamespace(URIS.ToCT_NS);
         Template template = TemplateReader.parseTemplate(templateName, templateURI, templatePath);
-        System.out.println("Second template portion = "+template.words.get(0).getNextPart());
-        System.out.println("Second part of the first poly. word = "+template.getPolymorphicWords().get(0).getNextPart());
+        System.out.println("Second template portion = "+template.words.get(0).getNextWordPart());
+        System.out.println("Second part of the first poly. word = "+template.getPolymorphicWords().get(0).getNextWordPart());
     }
 
     public static void testParseTemplate() throws Exception {

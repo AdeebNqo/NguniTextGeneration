@@ -103,8 +103,13 @@ public class Slot extends TemplatePortion implements InternalSlotOrWordPortion, 
     }
 
     @Override
-    public void setNextPart(InternalSlotRootAffix internalPart) {
+    public void setNextMorphPart(InternalSlotRootAffix internalPart) {
         nextPart = internalPart;
+    }
+
+    @Override
+    public InternalSlotRootAffix getNextMorphPart() {
+        return nextPart;
     }
 
     @Override
