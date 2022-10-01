@@ -4,6 +4,7 @@ import za.co.mahlaza.research.grammarengine.base.interfaces.MorphophonoAlternato
 import za.co.mahlaza.research.grammarengine.nguni.NguniVowelDetector;
 import za.co.mahlaza.research.grammarengine.nguni.VowelPosition;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.function.Consumer;
@@ -49,15 +50,17 @@ public class ZuluMorphophonoAlternator  implements MorphophonoAlternator {
         if (vowelsFollowEachOTher) {
             return true;
         }
-        else {
-            if (left.length() > 1 && left.matches(".*n[aeiou]")) {
+        else if (left.length() > 1 && left.matches(".*n[aeiou]")) {
                 String[] leadRightMorphemes = {"b", "f", "s", "v", "z", "dl", "hl", "kh", "sh", "th"};
                 for (String leadMorpheme : leadRightMorphemes) {
                     if (right.startsWith(leadMorpheme)) {
                         return true;
                     }
                 }
-            }
+        }
+        //nasals
+        else if ((leftEnd=='n' || leftEnd=='m') && (rightStart=='n' || rightStart=='m')) {
+            return true;
         }
         return false;
     }
