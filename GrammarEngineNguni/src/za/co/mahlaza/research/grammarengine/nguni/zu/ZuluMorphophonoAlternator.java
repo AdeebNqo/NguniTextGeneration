@@ -309,6 +309,18 @@ public class ZuluMorphophonoAlternator  implements MorphophonoAlternator {
             result.add("we");
             result.add(newRightMorpheme);
         }
+        //M.H. Mpungose's Analysis of the Word-Initial Segment with Reference to Lemmatising Zulu Nasal Nouns
+        if (leftChar == 'n' && rightChar == 'n') {
+            result.add(newLeftMorpheme);
+            result.add("n");
+            result.add(newRightMorpheme);
+        }
+        //M.H. Mpungose's Analysis of the Word-Initial Segment with Reference to Lemmatising Zulu Nasal Nouns
+        else if (leftChar == 'n' && rightChar == 'm') {
+            result.add(newLeftMorpheme);
+            result.add("m");
+            result.add(newRightMorpheme);
+        }
 
         //TODO: check if you need to palatise
         return result;
