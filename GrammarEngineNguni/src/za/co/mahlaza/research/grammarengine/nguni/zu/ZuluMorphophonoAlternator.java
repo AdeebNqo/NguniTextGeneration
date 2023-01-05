@@ -324,6 +324,12 @@ public class ZuluMorphophonoAlternator  implements MorphophonoAlternator {
             result.add("m");
             result.add(newRightMorpheme);
         }
+        //The following rule is not based on existing literature. It is based on my (i.e., Z. Mahlaza) observation regarding ezim- + -ne
+        else if (leftChar == 'm' && rightChar == 'n') {
+            result.add(newLeftMorpheme);
+            result.add("n");
+            result.add(newRightMorpheme);
+        }
 
         //TODO: check if you need to palatise
         return result;

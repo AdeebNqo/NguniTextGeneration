@@ -27,7 +27,21 @@ public class Main {
 //            testSaveTemplate();
 //            testGetTemplateURIs();
 //            testSaveShortTemplate();
-            testMorphemeStopFormation();
+//            testMorphemeStopFormation();
+            testNasalConditioning();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void testNasalConditioning() {
+        String lMorpheme = "ezim";
+        String rMorpheme = "ne";
+        System.out.println("Testing the combination of "+lMorpheme+" and "+rMorpheme);
+
+        ZuluMorphophonoAlternator morphophonoAlternator = new ZuluMorphophonoAlternator();
+        try {
+            System.out.println("Outcome = "+morphophonoAlternator.joinMorpheme(lMorpheme, rMorpheme));
         } catch (Exception e) {
             e.printStackTrace();
         }
